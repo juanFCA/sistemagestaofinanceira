@@ -102,5 +102,10 @@ Para o Windows procure tutoriais pois não sabemos e o Composer se acha aqui htt
 - O Bootstrap está na pasta public/css com o nome de app.css seguindo o padrão do Laravel.
 
 # Ficou interessado em saber o que estamos fazendo no trabalho do **[Daves Martins](https://github.com/davesmartins)** ? 
-> se a resposta e sim!!! não seja por isso pode testar a vontade link aqui em baixo
+> **se a resposta e sim!!! não seja por isso pode testar a vontade link aqui em baixo**
+> *obs:*
+> - [x] tela de login
+> - [x] tela de registro
+> - [ ] banco implementado 
+> - [ ] dashboard 
 ### sistema de controle financeira pessoal **[impekable-cesjf](https://impekable-cesjf.herokuapp.com/)**
