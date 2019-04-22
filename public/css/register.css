@@ -1,0 +1,20 @@
+body{
+    background-image: url("../img/fundo.svg");
+}
+
+.titulo-principal{
+    background-color: transparent;
+}
+h5{
+    font-weight: 900;
+}
+h6{
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+.card-transparente{
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
