@@ -57,7 +57,6 @@ class CategoriasController extends Controller
         $categoria->save();
         $message = "Categoria alterada com sucesso!";
         return redirect()->route('categoria')->with('message', $message);
-
     }
 
     public function delete($id)
