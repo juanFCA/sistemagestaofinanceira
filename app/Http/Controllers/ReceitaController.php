@@ -14,7 +14,7 @@ class ReceitaController extends Controller
 
     public function index()
     {
-        return "tela de Receitas";
+        return view('dashboard/receitas');
     }
 
     public function insert(Request $request)

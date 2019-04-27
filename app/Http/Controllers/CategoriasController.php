@@ -16,7 +16,7 @@ class CategoriasController extends Controller
 
     public function index()
     {
-        return "tela de categorias";
+        return view('dashboard/categorias');
     }
 
     public function insert(Request $request)

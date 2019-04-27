@@ -15,7 +15,7 @@ class DespesaController extends Controller
 
     public function index()
     {
-        return "tela de Despesas";
+        return view('dashboard/despesas'); 
     }
 
     public function insert(Request $request)
