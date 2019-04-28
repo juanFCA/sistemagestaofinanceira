@@ -15,13 +15,21 @@ class CreateDespesasTable extends Migration
     {
         Schema::create('despesas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('nome');
-            $table->string('descricao');
-            $table->boolean('recorrente');
-            $table->integer('categoria');
-            $table->date('data');
             $table->decimal('valor');
+            $table->date('data_vencimento');
+            $table->string('descricao');
+            $table->bigInteger('categoria_id')->unsigned()->nullable();
+            $table->string('forma_pagamento');
+            $table->boolean('pago');
+            $table->boolean('parcelado');
+            $table->boolean('data_cobranca_parcela');
+            $table->integer('num_parcelas');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
         });
     }
 

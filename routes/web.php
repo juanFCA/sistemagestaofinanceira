@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('home', 'HomeController');
 
-Route::get('/categorias', 'CategoriasController@index')->name('categorias');
+Route::resource('categorias', 'CategoriasController');
 
-Route::get('/receitas', 'ReceitaController@index')->name('receitas');
+Route::resource('receitas', 'ReceitaController');
 
-Route::get('/despesas', 'DespesaController@index')->name('receitas');
+Route::resource('despesas', 'DespesaController');
