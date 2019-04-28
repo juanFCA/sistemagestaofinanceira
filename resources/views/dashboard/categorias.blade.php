@@ -2,19 +2,23 @@
 
 @section('content')
 
-    <!-- Se existirem categorias setadas para edição-->
+    <!-- Se existir categoria setada para edição-->
     @if(session()->get('categoria'))
-    <?php $catedit = Session::get('categoria'); ?>
-    <script>
-        $(function() {
-            $('modal-categoria').modal('show');
-        });
-    </script>
+        <?php $catedit = Session::get('categoria'); ?>
     @endif
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Categorias</h1>
-
+    <!-- Se existirem erros a serem mostrados exibe aqui -->
+    @if ($errors->any())
+        <div class="alert alert-danger" id="divalert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row">
     <div class="col-md-6">
         <!-- Basic Card Example -->
@@ -37,17 +41,15 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <td>ID</td>
                             <td>Nome</td>
                             <td>Descrição</td>
-                            <td colspan="2">Ações</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($categorias as $categoria)
                             @if($categoria->receita == 1)
                             <tr>
-                                <td>{{ $categoria->id }}</td>
                                 <td>{{ $categoria->nome }}</td>
                                 <td>{{ $categoria->descricao }}</td>
                                 <td class="d-flex justify-content-end">
@@ -90,17 +92,15 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <td>ID</td>
                             <td>Nome</td>
                             <td>Descrição</td>
-                            <td colspan="2">Ações</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($categorias as $categoria)
                             @if($categoria->receita == 0)
                             <tr>
-                                <td>{{ $categoria->id }}</td>
                                 <td>{{ $categoria->nome }}</td>
                                 <td>{{ $categoria->descricao }}</td>
                                 <td class="d-flex justify-content-end">
@@ -149,8 +149,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group d-flex flex-row align-items-lg-center">
-                                    <input id='receitaHidden' type='hidden' value='0' name='receita'>
-                                    <input id="receita" class="form-check-input" type="checkbox" value="1" name="receita" 
+                                    <input id='categoriasCheckHidden' type='hidden' value='0' name='receita'>
+                                    <input id="categoriasCheck" class="form-check-input" type="checkbox" value="1" name="receita" 
                                     @if(isset($catedit) && $catedit->receita == 1)
                                         checked="checked" >
                                     @endif

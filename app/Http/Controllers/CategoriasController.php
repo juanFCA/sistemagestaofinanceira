@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriasController extends Controller
 {
@@ -15,9 +16,14 @@ class CategoriasController extends Controller
 
     public function index()
     {
-        $categorias = Categoria::all();
-        unset($categoria);
+        //Busca a categoria cadastrada pelo Usuário especifico
+        $categorias = Categoria::where('user_id', Auth::user()->id)->get();
         return view('dashboard/categorias', compact('categorias'));
+    }
+
+    public function create()
+    {
+        //
     }
 
     public function store(Request $request)
@@ -28,6 +34,7 @@ class CategoriasController extends Controller
             'descricao' => 'required|string|max:255',
             'receita' => 'required|boolean'
         ]);
+
         $categoria = new Categoria([
             'user_id' => $request['user_id'],
             'nome' => $request['nome'],
@@ -35,6 +42,7 @@ class CategoriasController extends Controller
             'receita' => $request['receita']
         ]);
         $categoria->save();
+
         if($categoria->receita) {
             return redirect('/categorias')->with('success-receita', 'Categoria Cadastrada com Sucesso');
         } else {
@@ -50,6 +58,7 @@ class CategoriasController extends Controller
     public function edit($id)
     {
         $categoria = Categoria::find($id);
+        
         return redirect('/categorias#modal-categoria')->with('categoria',$categoria);
     }
 
@@ -79,6 +88,7 @@ class CategoriasController extends Controller
     {
         $categoria = Categoria::find($id);
         $categoria->delete();
+
         if($categoria->receita) {
             return redirect('/categorias')->with('success-receita', 'Categoria Removida com Sucesso');
         } else {

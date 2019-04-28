@@ -16,8 +16,10 @@ class Despesa extends Model
         'forma_pagamento',
         'pago',
         'parcelado',
-        'data_cobranca_parcela',
+        'dia_cobranca_parcela',
         'num_parcelas',
+        'notificar',
+        'num_meses'
     ];
 
     protected $guarded = ['id', 'created_at', 'update_at'];

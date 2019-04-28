@@ -17,7 +17,7 @@ class Receita extends Model
         'disponivel',
         'fixa',
         'recorrente',
-        'num_meses',
+        'num_meses'
     ];
     
     protected $guarded = ['id', 'created_at', 'update_at'];
