@@ -62,7 +62,7 @@
                                 @endforeach
                                 <td>{{ $receita->data_vencimento }}</td>
                                 <td>{{ $receita->valor }}</td>
-                                <td>@if($receita->situacao == 0) Não Disponível @else Disponível @endif</td>
+                                <td>@if($receita->disponivel == 1) Disponível @else Não Disponível @endif</td>
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ route('receitas.edit',$receita->id)}}" class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-pen"></i>

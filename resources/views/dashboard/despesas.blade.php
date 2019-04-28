@@ -62,7 +62,7 @@
                                 @endforeach
                                 <td>{{ $despesa->data_vencimento }}</td>
                                 <td>{{ $despesa->valor }}</td>
-                                <td>@if($despesa->situacao == 0) Em Aberto @else Paga @endif</td>
+                                <td>@if($despesa->pago == 1)  Paga @else Em Aberto @endif</td>
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ route('despesas.edit',$despesa->id)}}" class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-pen"></i>
@@ -84,7 +84,7 @@
     </div>
 
     <!--Modal despesa-->
-    <div class="modal fade modal-despesa" tabindex="-1" role="dialog" aria-labelledby="modal-despesa" aria-hidden="true">
+    <div class="modal fade modal-despesa" id="modal-despesa" tabindex="-1" role="dialog" aria-labelledby="modal-despesa" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-danger">
