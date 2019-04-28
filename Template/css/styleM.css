@@ -1,0 +1,24 @@
+html{
+    background-image: url(../img/fundo.svg);
+    background-repeat:no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    background-color: rgba(0, 0, 0, 0);
+}
+.col-sm-9 .card{
+    background-color: transparent;
+    border: 1px solid white;
+    color: white
+}
+.btn{
+    background-color:#312D2E;
+    color: white;
+    border: 1px solid whitesmoke;
+}
+/* TODO
+    alterar a cor do btn ao passar o mouse
+    alterar a lagura da margen de sinalização
+*/

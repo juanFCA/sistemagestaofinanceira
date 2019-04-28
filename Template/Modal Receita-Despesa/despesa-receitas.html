@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Carrega os arquivos css necessários à página-->
+    <link rel="stylesheet" href="./Content/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./Content/receita-despesa.css">
+    <title>Receitas e Despesas - Sistema Financeiro</title>
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center">
+
+        <!--Botão receita-->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-receita">Receita</button>
+        <!--Botão despesa-->
+        <button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+            data-target=".modal-despesa">Despesa</button>
+
+
+    </div>
+
+    <!--Modal receita-->
+    <div class="modal fade modal-receita" tabindex="-1" role="dialog" aria-labelledby="modal-receita"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h3 class="text-white font-weight-bold">Receita</h3>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="">Nome</label>
+                                <input type="text" class="form-control shadow-sm" name="nome">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="">Valor (R$)</label>
+                                <input type="text" class="form-control shadow-sm money" name="nome">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="">Vencimento</label>
+                                <input type="text" class="form-control shadow-sm date" name="nome">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="">Descrição</label>
+                                <input type="text" class="form-control shadow-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="">Categoria</label>
+                                <select name="" id="" class="form-control shadow-sm">
+                                    <option value="0">
+                                        Salário
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">Forma pagamento</label>
+                                <select name="" id="" class="form-control shadow-sm">
+                                    <option value="0">
+                                        Cartão de Crédito
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Está disponível?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Receita fixa
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check d-flex flex-row align-items-lg-center">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Receita recorrente (meses)
+                                    </label>
+                                    <input type="text" class="form-control w-25 ml-3 shadow-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal despesa-->
+    <div class="modal fade modal-despesa" tabindex="-1" role="dialog" aria-labelledby="modal-despesa"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h3 class="text-white font-weight-bold">Receitas</h3>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="">Nome</label>
+                                <input type="text" class="form-control shadow-sm" name="nome">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="">Valor (R$)</label>
+                                <input type="text" class="form-control shadow-sm money" name="nome">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="">Vencimento</label>
+                                <input type="text" class="form-control shadow-sm date" name="nome">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="">Descrição</label>
+                                <input type="text" class="form-control shadow-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="">Categoria</label>
+                                <select name="" id="" class="form-control shadow-sm">
+                                    <option value="0">
+                                        Salário
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">Forma pagamento</label>
+                                <select name="" id="" class="form-control shadow-sm">
+                                    <option value="0">
+                                        Cartão de Crédito
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Está pago?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1 mt-1">
+                            <div class="col-md-7 col-sm-12">
+                                <div class="form-check d-flex flex-row align-items-lg-center">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Parcelamento
+                                    </label>
+                                    <div class="w-40 ml-2">
+                                        <input type="text" class="form-control shadow-sm date"
+                                            placeholder="Data de cobrança">
+                                    </div>
+                                    <div class="w-25 ml-2">
+                                        <input type="text" class="form-control shadow-sm" placeholder="Parcelas">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-check d-flex flex-row align-items-lg-center">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Notificar (meses)
+                                    </label>
+                                    <input type="text" class="form-control w-25 ml-3 shadow-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Carrega os scrips necessários à página-->
+    <script src="./Scripts/jquery.js"></script>
+    <script src="./Scripts/jquery.mask.min.js"></script>
+    <script src="./Scripts/bootstrap/bootstrap.js"></script>
+    <script src="./Scripts/receita-despesa.js"></script>
+</body>
+
+</html>
