@@ -43,6 +43,7 @@
                         <tr>
                             <td>Nome</td>
                             <td>Descrição</td>
+                            <td>Cor</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -52,6 +53,7 @@
                             <tr>
                                 <td>{{ $categoria->nome }}</td>
                                 <td>{{ $categoria->descricao }}</td>
+                                <td style="background-color:{{ $categoria->cor }}"></td>
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ route('categorias.edit',$categoria->id)}}" class="btn btn-primary btn-circle btn-sm">
                                     <i class="fas fa-pen"></i>
@@ -94,6 +96,7 @@
                         <tr>
                             <td>Nome</td>
                             <td>Descrição</td>
+                            <td>Cor</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -103,6 +106,7 @@
                             <tr>
                                 <td>{{ $categoria->nome }}</td>
                                 <td>{{ $categoria->descricao }}</td>
+                                <td style="background-color:{{ $categoria->cor }}"></td>
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ route('categorias.edit',$categoria->id)}}" class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-pen"></i>
@@ -147,7 +151,15 @@
                                 <input type="text" class="form-control shadow-sm" name="nome" 
                                 value="@if(isset($catedit)){{ $catedit->nome }}@endif">
                             </div>
-                            <div class="col-md-6">
+                            <div class="form-group col-md-3">
+                                <label for="nome">Cor</label>
+                                <input id="colorpicker" type="text" class="form-control shadow-sm" name="cor" 
+                                        value="@if(isset($catedit)){{ $catedit->cor }}@endif">
+                                <script>
+                                    $('#colorpicker').colorpicker({});
+                                </script>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group d-flex flex-row align-items-lg-center">
                                     <input id='categoriasCheckHidden' type='hidden' value='0' name='receita'>
                                     <input id="categoriasCheck" class="form-check-input" type="checkbox" value="1" name="receita" 

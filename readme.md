@@ -86,6 +86,10 @@ Instale as dependências do projeto com o comando:
 
 - composer install
 
+E a cada novo pull realizado dê o seguinte comando:
+
+- composer update
+
 Configure um arquivo .env dentro da pasta do Projeto
 Crie o banco de dados da aplicação.
 

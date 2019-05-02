@@ -10,7 +10,8 @@ class Categoria extends Model
         'user_id', 
         'nome',
         'descricao',
-        'receita'
+        'receita',
+        'cor'
     ];
 
     protected $guarded = ['id', 'created_at', 'update_at'];

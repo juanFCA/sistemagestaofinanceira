@@ -61,9 +61,9 @@
                 <div class="card-header bg-info text-xs text-uppercase text-white font-weight-bold">
                     Receita / Categoria
                 </div>
-                <div class="card-body">
-                    <canvas id="receita-categoria" height="250" width="250"></canvas>
-                </div>
+                <div class="card-body" id="chart-div-receita"></div>
+                <!-- Renderizamos passando o Tipo, Nome, ID da Div -->
+                <?= $lava->render("DonutChart","ReceitaCategoria","chart-div-receita")?>
             </div>
         </div>
 
@@ -72,9 +72,9 @@
             <div class="card-header bg-danger text-xs text-uppercase text-white font-weight-bold">
                     Despesa / Categoria
             </div>
-            <div class="card-body">
-                    <canvas id="despesa-categoria" height="250" width="250"></canvas>
-            </div>
+            <div class="card-body" id="chart-div-despesa"></div>
+            <!-- Renderizamos passando o Tipo, Nome, ID da Div -->
+            <?= $lava->render("DonutChart","DespesaCategoria","chart-div-despesa")?>
         </div>
     </div>
 @endsection

@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 use App\Despesa;
 use App\Receita;
 use Illuminate\Support\Facades\Auth;
-use App\Charts\ReceitaCategoria;
-use App\Charts\DespesaCategoria;
 use App\Categoria;
-use App\User;
+use Khill\Lavacharts\Lavacharts;
 
 class HomeController extends Controller
 {
@@ -28,13 +26,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $lava = new Lavacharts;
+
         $totalReceitas = $this->totalReceitas();
         $totalDespesas = $this->totalDespesas();
 
-        //$receitaCategoriaChart = $this->receitaCategoriaChart();
-        //$despesaCategoriaChart = $this->despesaCategoriaChart();
+        //Chamando os gráficos
+        self::receitaCategoriaChart($lava);
+        self::despesaCategoriaChart($lava);
 
-        return view('home', compact('totalReceitas','totalDespesas'));
+        return view('home', compact('totalReceitas','totalDespesas','lava'));
     }
 
     private function totalReceitas() {
@@ -55,29 +56,65 @@ class HomeController extends Controller
         return $soma;
     }
 
-    private function receitaCategoriaChart() {
-        $categoriasReceitaNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 1)->pluck('nome');
-        $categoriasReceitaValor = Receita::where('user_id', Auth::user()->id)->pluck('valor');
+    private static function receitaCategoriaChart($lava) {
+        //Pegamos o Id e Nome das Categorias de Receita --- 1
+        $categoriasIdNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 1)->select('id','nome','cor')->get();
+        $receitaIdValor = Receita::where('user_id', Auth::user()->id)->select('categoria_id', 'valor')->get();
+        $cores = array();
 
-        $chart = new ReceitaCategoria;
-        $chart->labels($categoriasReceitaNome);
-        $chart->dataset('Valores', 'doughnut', $categoriasReceitaValor);
-        $chart->displayAxes(false, false);
-        $chart->minimalist(true);
+        $reasons = $lava->DataTable();
+        $reasons->addStringColumn('Categoria')
+                ->addNumberColumn('Valor');
+        foreach ($categoriasIdNome as $key => $categoria) {
+            $soma = 0;
+            foreach ($receitaIdValor as $key => $receita) {
+                if($receita->categoria_id == $categoria->id) {
+                    $soma+= $receita->valor;
+                }
+            }
+            $reasons->addRow([$categoria->nome, $soma]);
+            $cores[] = [$categoria->cor];
+        }
 
-        return $chart;
+        var_dump($cores);
+
+        $lava->DonutChart('ReceitaCategoria', $reasons, [
+            //Buraco central de 0 a 1 (Float)
+            'colors'            => $cores,
+            'pieHole'           => 0.75,
+            'height'            => 300,
+            'width'             => 600,
+            'fontSize'          => 16,
+        ]);
     }
 
-    private function despesaCategoriaChart() {
-        $categoriasDespesaNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 0)->pluck('nome');
-        $categoriasDespesaValor = Despesa::where('user_id', Auth::user()->id)->pluck('valor');
+    private static function despesaCategoriaChart($lava) {
+        //Pegamos o Id e Nome das Categorias de Despesa --- 0
+        $categoriasIdNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 0)->select('id','nome','cor')->get();
+        $despesaIdValor = Despesa::where('user_id', Auth::user()->id)->select('categoria_id','valor')->get();
+        $cores = array();
 
-        $chart = new DespesaCategoria;
-        $chart->labels($categoriasDespesaNome);
-        $chart->dataset('Valores', 'doughnut', $categoriasDespesaValor);
-        $chart->displayAxes(false, false);
-        $chart->minimalist(true);
+        $reasons = $lava->DataTable();
+        $reasons->addStringColumn('Categoria')
+                ->addNumberColumn('Valor');
+        foreach ($categoriasIdNome as $key => $categoria) {
+            $soma = 0;
+            foreach ($despesaIdValor as $key => $despesa) {
+                if($despesa->categoria_id == $categoria->id) {
+                    $soma+= $despesa->valor;
+                }
+            }
+            $reasons->addRow([$categoria->nome, $soma]);
+            $cores[] = [$categoria->cor];
+        }
 
-        return $chart;
+        $lava->DonutChart('DespesaCategoria', $reasons, [
+            //Buraco central de 0 a 1 (Float)
+            'colors'            => $cores,
+            'pieHole'           => 0.75,
+            'height'            => 300,
+            'width'             => 600,
+            'fontSize'          => 16,
+        ]);
     }
 }

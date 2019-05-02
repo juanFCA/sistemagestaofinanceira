@@ -32,14 +32,16 @@ class CategoriasController extends Controller
             'user_id' => 'required|integer',
             'nome' => 'required|string|max:255',
             'descricao' => 'required|string|max:255',
-            'receita' => 'required|boolean'
+            'receita' => 'required|boolean',
+            'cor' => 'required|string|max:255'
         ]);
 
         $categoria = new Categoria([
             'user_id' => $request['user_id'],
             'nome' => $request['nome'],
             'descricao' => $request['descricao'],
-            'receita' => $request['receita']
+            'receita' => $request['receita'],
+            'cor' =>$request['cor']
         ]);
         $categoria->save();
 
@@ -67,7 +69,9 @@ class CategoriasController extends Controller
         $request->validate([
             'user_id' => 'required|integer',
             'nome' => 'required|string|max:255',
-            'descricao' => 'required|string|max:255'
+            'descricao' => 'required|string|max:255',
+            'receita' => 'required|boolean',
+            'cor' => 'required|string|max:255'
         ]);
     
         $categoria = Categoria::find($id);
@@ -75,6 +79,7 @@ class CategoriasController extends Controller
         $categoria->nome = $request->get('nome');
         $categoria->descricao = $request->get('descricao');
         $categoria->receita = $request->get('receita');
+        $categoria->cor = $request->get('cor');
         $categoria->save();
     
         if($categoria->receita) {
