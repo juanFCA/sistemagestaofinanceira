@@ -153,19 +153,23 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="nome">Cor</label>
-                                <input id="colorpicker" type="text" class="form-control shadow-sm" name="cor" 
-                                        value="@if(isset($catedit)){{ $catedit->cor }}@endif">
+                                <div id="colorpicker" class="input-group" title="Cor Tema">
+                                    <input type="text" class="form-control input-lg shadow-sm" name="cor"
+                                        value="@if(isset($catedit)){{ $catedit->cor }}@endif" >
+                                    <span class="input-group-append">
+                                        <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                                    </span>
+                                </div>
                                 <script>
-                                    $('#colorpicker').colorpicker({});
+                                    $('#colorpicker').colorpicker();
+                                    $('#colorpicker').colorpicker({"color": "#16813D"});
                                 </script>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group d-flex flex-row align-items-lg-center">
+                            <div class="form-group col-md-3">
+                                <div class="d-flex flex-row align-items-lg-center">
                                     <input id='categoriasCheckHidden' type='hidden' value='0' name='receita'>
                                     <input id="categoriasCheck" class="form-check-input" type="checkbox" value="1" name="receita" 
-                                    @if(isset($catedit) && $catedit->receita == 1)
-                                        checked="checked" >
-                                    @endif
+                                        @if(isset($catedit) && $catedit->receita == 1) checked="checked" @endif >
                                     <label class="form-check-label">
                                         É Receita?
                                     </label>

@@ -62,9 +62,13 @@ class HomeController extends Controller
         $receitaIdValor = Receita::where('user_id', Auth::user()->id)->select('categoria_id', 'valor')->get();
         $cores = array();
 
+        $formato = $lava->NumberFormat([
+            'prefix'            => 'R$ '
+        ]);
+
         $reasons = $lava->DataTable();
         $reasons->addStringColumn('Categoria')
-                ->addNumberColumn('Valor');
+                ->addNumberColumn('Valor', $formato, 'scope');
         foreach ($categoriasIdNome as $key => $categoria) {
             $soma = 0;
             foreach ($receitaIdValor as $key => $receita) {
@@ -76,14 +80,12 @@ class HomeController extends Controller
             $cores[] = [$categoria->cor];
         }
 
-        var_dump($cores);
-
         $lava->DonutChart('ReceitaCategoria', $reasons, [
-            //Buraco central de 0 a 1 (Float)
             'colors'            => $cores,
-            'pieHole'           => 0.75,
-            'height'            => 300,
-            'width'             => 600,
+            //Buraco central de 0 a 1 (Float)
+            'pieHole'           => 0.70,
+            //'height'            => 300,
+            //'width'             => 450,
             'fontSize'          => 16,
         ]);
     }
@@ -94,9 +96,13 @@ class HomeController extends Controller
         $despesaIdValor = Despesa::where('user_id', Auth::user()->id)->select('categoria_id','valor')->get();
         $cores = array();
 
+        $formato = $lava->NumberFormat([
+            'prefix'            => 'R$ '
+        ]);
+
         $reasons = $lava->DataTable();
         $reasons->addStringColumn('Categoria')
-                ->addNumberColumn('Valor');
+                ->addNumberColumn('Valor', $formato);
         foreach ($categoriasIdNome as $key => $categoria) {
             $soma = 0;
             foreach ($despesaIdValor as $key => $despesa) {
@@ -109,12 +115,14 @@ class HomeController extends Controller
         }
 
         $lava->DonutChart('DespesaCategoria', $reasons, [
-            //Buraco central de 0 a 1 (Float)
             'colors'            => $cores,
-            'pieHole'           => 0.75,
-            'height'            => 300,
-            'width'             => 600,
+            //Buraco central de 0 a 1 (Float)
+            'pieHole'           => 0.70,
+            //'height'            => 300,
+            //'width'             => 450,
             'fontSize'          => 16,
         ]);
+
+        
     }
 }
