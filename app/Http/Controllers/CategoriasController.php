@@ -32,7 +32,7 @@ class CategoriasController extends Controller
             'user_id' => 'required|integer',
             'nome' => 'required|string|max:255',
             'descricao' => 'required|string|max:255',
-            'receita' => 'required|boolean',
+            'receita' => 'required|integer',
             'cor' => 'required|string|max:255'
         ]);
 
@@ -70,7 +70,7 @@ class CategoriasController extends Controller
             'user_id' => 'required|integer',
             'nome' => 'required|string|max:255',
             'descricao' => 'required|string|max:255',
-            'receita' => 'required|boolean',
+            'receita' => 'required|integer',
             'cor' => 'required|string|max:255'
         ]);
     

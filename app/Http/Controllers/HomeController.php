@@ -57,8 +57,8 @@ class HomeController extends Controller
     }
 
     private static function receitaCategoriaChart($lava) {
-        //Pegamos o Id e Nome das Categorias de Receita --- 1
-        $categoriasIdNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 1)->select('id','nome','cor')->get();
+        //Pegamos o Id e Nome das Categorias de Receita --- 0 e 2
+        $categoriasIdNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 0)->orWhere('receita', 2)->select('id','nome','cor')->get();
         $receitaIdValor = Receita::where('user_id', Auth::user()->id)->select('categoria_id', 'valor')->get();
         $cores = array();
 
@@ -91,8 +91,8 @@ class HomeController extends Controller
     }
 
     private static function despesaCategoriaChart($lava) {
-        //Pegamos o Id e Nome das Categorias de Despesa --- 0
-        $categoriasIdNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 0)->select('id','nome','cor')->get();
+        //Pegamos o Id e Nome das Categorias de Despesa --- 1 e 2
+        $categoriasIdNome = Categoria::where('user_id', Auth::user()->id)->where('receita', 1)->orWhere('receita', 2)->select('id','nome','cor')->get();
         $despesaIdValor = Despesa::where('user_id', Auth::user()->id)->select('categoria_id','valor')->get();
         $cores = array();
 

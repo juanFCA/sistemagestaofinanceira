@@ -101,6 +101,12 @@ Para criar as tabelas no banco rode
 
 - php artisan migrate
 
+Para Semear o Banco de Dados com nosso Presets rode
+
+- composer dump-autoload
+- php artisan db:seed
+> - Usuário Padrão admin@admin.com e Senha Padrão adminsistema
+
 Para o Windows procure tutoriais pois não sabemos e o Composer se acha aqui https://getcomposer.org/.
 
 - O Bootstrap está na pasta public/css com o nome de app.css seguindo o padrão do Laravel.

@@ -18,7 +18,7 @@ class DespesaController extends Controller
     public function index()
     {
         //Busca categorias de um usuario especifico e do tipo despesa
-        $categorias = Categoria::where('user_id', Auth::user()->id)->where('receita', 0)->get();
+        $categorias = Categoria::where('user_id', Auth::user()->id)->where('receita', 1)->orWhere('receita', 2)->get();
         //Busca despesas de um usuario especifico
         $despesas = Despesa::where('user_id', Auth::user()->id)->get();
         return view('dashboard/despesas', compact('categorias','despesas'));

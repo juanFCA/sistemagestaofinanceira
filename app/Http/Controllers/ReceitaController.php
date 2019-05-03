@@ -18,7 +18,7 @@ class ReceitaController extends Controller
     public function index()
     {
         //Busca categorias de um usuario especifico e do tipo receita
-        $categorias = Categoria::where('user_id', Auth::user()->id)->where('receita', 1)->get();
+        $categorias = Categoria::where('user_id', Auth::user()->id)->where('receita', 0)->orWhere('receita', 2)->get();
         //Busca receitas de um usuario especifico
         $receitas = Receita::where('user_id', Auth::user()->id)->get();
         return view('dashboard/receitas', compact('categorias','receitas'));

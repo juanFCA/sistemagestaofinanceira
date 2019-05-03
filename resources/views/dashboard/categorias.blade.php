@@ -49,7 +49,8 @@
                     </thead>
                     <tbody>
                         @foreach($categorias as $categoria)
-                            @if($categoria->receita == 1)
+                            <!-- Se ambas ou Receita mostra aqui -->
+                            @if($categoria->receita == 2 || $categoria->receita == 0)
                             <tr>
                                 <td>{{ $categoria->nome }}</td>
                                 <td>{{ $categoria->descricao }}</td>
@@ -102,7 +103,8 @@
                     </thead>
                     <tbody>
                         @foreach($categorias as $categoria)
-                            @if($categoria->receita == 0)
+                            <!-- Se ambas ou Despesa mostra aqui -->
+                            @if($categoria->receita == 2 || $categoria->receita == 1)
                             <tr>
                                 <td>{{ $categoria->nome }}</td>
                                 <td>{{ $categoria->descricao }}</td>
@@ -152,7 +154,7 @@
                                 value="@if(isset($catedit)){{ $catedit->nome }}@endif">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="nome">Cor</label>
+                                <label for="colorpicker">Cor</label>
                                 <div id="colorpicker" class="input-group" title="Cor Tema">
                                     <input type="text" class="form-control input-lg shadow-sm" name="cor"
                                         value="@if(isset($catedit)){{ $catedit->cor }}@endif" >
@@ -165,13 +167,27 @@
                                     $('#colorpicker').colorpicker({"color": "#16813D"});
                                 </script>
                             </div>
-                            <div class="form-group col-md-3">
-                                <div class="d-flex flex-row align-items-lg-center">
-                                    <input id='categoriasCheckHidden' type='hidden' value='0' name='receita'>
-                                    <input id="categoriasCheck" class="form-check-input" type="checkbox" value="1" name="receita" 
+                            <div class="form-group col-md-3">  
+                                <label for="tipo">Tipo</label>    
+                                <div class="form-check" id="tipo">
+                                    <input id="categoriasCheck" class="form-check-input" type="radio" value="0" name="receita" 
+                                        @if(isset($catedit) && $catedit->receita == 0) checked="checked" @endif >
+                                    <label class="form-check-label">
+                                        Receita
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="categoriasCheck" class="form-check-input" type="radio" value="1" name="receita" 
                                         @if(isset($catedit) && $catedit->receita == 1) checked="checked" @endif >
                                     <label class="form-check-label">
-                                        É Receita?
+                                        Despesa
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="categoriasCheck" class="form-check-input" type="radio" value="2" name="receita" 
+                                        @if(isset($catedit) && $catedit->receita == 2) checked="checked" @endif >
+                                    <label class="form-check-label">
+                                        Ambos
                                     </label>
                                 </div>
                             </div>
