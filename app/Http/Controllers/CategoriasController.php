@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriasController extends Controller
 {
@@ -16,54 +16,88 @@ class CategoriasController extends Controller
 
     public function index()
     {
-        return "tela de categorias";
+        //Busca a categoria cadastrada pelo Usuário especifico
+        $categorias = Categoria::where('user_id', Auth::user()->id)->get();
+        return view('dashboard/categorias', compact('categorias'));
     }
 
-    public function insert(Request $request)
+    public function create()
     {
-        $errors = Validator::make($request->all(), [
+        //
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
             'nome' => 'required|string|max:255',
-            'descricao' => 'required|string',
+            'descricao' => 'required|string|max:255',
+            'receita' => 'required|integer',
+            'cor' => 'required|string|max:255'
         ]);
 
-        if($errors->fails()){
-            return redirect('/categoria/add')->withErrors($errors)->withInput();
+        $categoria = new Categoria([
+            'user_id' => $request['user_id'],
+            'nome' => $request['nome'],
+            'descricao' => $request['descricao'],
+            'receita' => $request['receita'],
+            'cor' =>$request['cor']
+        ]);
+        $categoria->save();
+
+        if($categoria->receita) {
+            return redirect('/categorias')->with('success-receita', 'Categoria Cadastrada com Sucesso');
         } else {
-            Categoria::create([
-                'nome' => $request['nome'],
-                'descricao' => $request['descricao']
-            ]);
-            $message = "Categoria adicionada com sucesso!";
-            return redirect()->route('categoria')->with('message', $message);
-        }
+            return redirect('/categorias')->with('success-despesa', 'Categoria Cadastrada com Sucesso');
+        } 
     }
 
-    public function listAll() {
-        $categoria = Categoria::all();
-        return json_encode($categoria);
-    }
-
-    public function listOne($id)
+    public function show($id)
     {
-        $categoria = Categoria::findOrFail($id);
-        return json_encode($categoria);
+        //
+    }
+
+    public function edit($id)
+    {
+        $categoria = Categoria::find($id);
+        
+        return redirect('/categorias#modal-categoria')->with('categoria',$categoria);
     }
 
     public function update(Request $request, $id)
-    {   
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string|max:255',
+            'receita' => 'required|integer',
+            'cor' => 'required|string|max:255'
+        ]);
+    
         $categoria = Categoria::find($id);
-        $categoria->nome = $request['nome'];
-        $categoria->descricao = $request['descricao'];
+        $categoria->user_id = $request->get('user_id');
+        $categoria->nome = $request->get('nome');
+        $categoria->descricao = $request->get('descricao');
+        $categoria->receita = $request->get('receita');
+        $categoria->cor = $request->get('cor');
         $categoria->save();
-        $message = "Categoria alterada com sucesso!";
-        return redirect()->route('categoria')->with('message', $message);
+    
+        if($categoria->receita) {
+            return redirect('/categorias')->with('success-receita', 'Categoria Alterada com Sucesso');
+        } else {
+            return redirect('/categorias')->with('success-despesa', 'Categoria Alterada com Sucesso');
+        }   
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $categoria = Categoria::find($id);
-        $message = "Categoria removida com sucesso!";
         $categoria->delete();
-        return redirect()->route('categoria')->with('message', $message);
+
+        if($categoria->receita) {
+            return redirect('/categorias')->with('success-receita', 'Categoria Removida com Sucesso');
+        } else {
+            return redirect('/categorias')->with('success-despesa', 'Categoria Removida com Sucesso');
+        }
     }
 }

@@ -86,6 +86,10 @@ Instale as dependências do projeto com o comando:
 
 - composer install
 
+E a cada novo pull realizado dê o seguinte comando:
+
+- composer update
+
 Configure um arquivo .env dentro da pasta do Projeto
 Crie o banco de dados da aplicação.
 
@@ -96,6 +100,12 @@ Agora rode o servidor
 Para criar as tabelas no banco rode
 
 - php artisan migrate
+
+Para Semear o Banco de Dados com nosso Presets rode
+
+- composer dump-autoload
+- php artisan db:seed
+> - Usuário Padrão admin@admin.com e Senha Padrão adminsistema
 
 Para o Windows procure tutoriais pois não sabemos e o Composer se acha aqui https://getcomposer.org/.
 
@@ -108,4 +118,4 @@ Para o Windows procure tutoriais pois não sabemos e o Composer se acha aqui htt
 > - [x] tela de registro
 > - [ ] banco implementado 
 > - [ ] dashboard 
-### sistema de controle financeira pessoal **[impekable-cesjf](https://impekable-cesjf.herokuapp.com/)**
+### sistema de controle financeira pessoal **[impekable-cesjf](https://impekable-cesjf.herokuapp.com/)** 
